@@ -1,25 +1,32 @@
 import React from "react";
 
-function InfoCardRest({ data }) {
+type RestProps = {
+  OpenTime: string;
+  Phone: string;
+  Address: string;
+  WebsiteUrl: string;
+};
+
+function InfoCardRest({ OpenTime, Phone, Address, WebsiteUrl }: RestProps) {
   return (
     <div className="detail">
       <p>
         <h3 className="focus">營業時間:</h3>
-        {data.OpenTime}
+        {OpenTime}
       </p>
       <p>
         <h3 className="focus">聯絡電話:</h3>
-        <a href={`tel:${data.Phone}`}>{data.Phone}</a>
+        <a href={`tel:${Phone}`}>{Phone}</a>
       </p>
       <p>
         <h3 className="focus">餐廳地址:</h3>
-        {data.Address}
+        {Address}
       </p>
       <p>
         <h3 className="focus">官方網站:</h3>
-        {data.WebsiteUrl ? (
-          <a href={data.WebsiteUrl} target="_blank" rel="noreferrer">
-            {data.WebsiteUrl}
+        {WebsiteUrl ? (
+          <a href={WebsiteUrl} target="_blank" rel="noreferrer">
+            {WebsiteUrl}
           </a>
         ) : (
           <span>無</span>

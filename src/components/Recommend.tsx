@@ -1,11 +1,10 @@
 import React from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import ListCard from "./ListCard";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
-import { setSearchData } from "../store/slice/search";
+import { Search, useDispatch } from "../store/";
 
 const RecommendComp = styled.div`
   margin-top: 50px;
@@ -28,6 +27,11 @@ const RecommendComp = styled.div`
   }
 `;
 
+type RecommendProps = {
+  title: string;
+  list: {}[];
+}
+
 function Recommend({ data }) {
   const history = useHistory();
   const dispatch = useDispatch();
@@ -35,7 +39,7 @@ function Recommend({ data }) {
     const dataObj = {
       type: data?.type,
     };
-    dispatch(setSearchData(dataObj));
+    dispatch(Search.setSearchData(dataObj));
     history.push("/search");
   };
   return (

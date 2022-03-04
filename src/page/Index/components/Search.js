@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import DropDown from "../../../components/DropDown.tsx";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";

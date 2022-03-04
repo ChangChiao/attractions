@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import ListCard from "../../../components/ListCard.tsx";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";

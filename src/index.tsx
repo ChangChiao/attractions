@@ -16,10 +16,5 @@ ReactDOM.render(
       <App />
     </StoreProvider>
   </StrictMode>,
-  // <HashRouter>
-  //   <Switch>
-  //     <App />
-  //   </Switch>
-  // </HashRouter>,
   document.getElementById("root")
 );

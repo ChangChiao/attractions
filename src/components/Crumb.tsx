@@ -1,9 +1,8 @@
 import React from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import { MENU_LIST } from "../config/constant";
-import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setSearchData } from "../store/slice/search";
+import { Search, useDispatch } from "../store";
 
 const CrumbComp = styled.div`
   padding-bottom: 20px;
@@ -18,10 +17,10 @@ const CrumbComp = styled.div`
   }
 `;
 
-export default function Crumb({ type, title }) {
+export default function Crumb({ type, title }: { type: string; title: string }) {
   const history = useHistory();
   const dispatch = useDispatch();
-  const goPage = (title) => {
+  const goPage = (title: string) => {
     let goPath = "";
     if (title === "首頁") goPath = "/";
     MENU_LIST.forEach((element) => {
@@ -30,7 +29,7 @@ export default function Crumb({ type, title }) {
         const dataObj = {
           type: element.path,
         };
-        dispatch(setSearchData(dataObj));
+        dispatch(Search.setSearchData(dataObj));
       }
     });
     goPath &&

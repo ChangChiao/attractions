@@ -1,7 +1,6 @@
 import React from "react";
-import styled from "@emotion/react";
-import { useDispatch } from "react-redux";
-import { setIntroData } from "../store/slice/intro";
+import styled from "@emotion/styled";
+import { useDispatch, Intro } from "../store/slice/intro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { transDate } from "../utils/common";
@@ -60,7 +59,17 @@ const ListComp = styled.div`
   }
 `;
 
-function ListItem({ data }) {
+type ItemProps = {
+  Picture?: {
+    PictureUrl1?: string;
+  };
+  ScenicSpotName?: string;
+  RestaurantName?: string;
+  Address?: string;
+  City?: string;
+};
+
+function ListItem({ data }: { data: ItemProps }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const setImage = (Picture = {}) => {
@@ -68,7 +77,7 @@ function ListItem({ data }) {
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };
   const handleClick = () => {
-    dispatch(setIntroData(data));
+    dispatch(Intro.setIntroData(data));
     history.push({
       pathname: "/intro",
     });

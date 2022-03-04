@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import Recommend from "../../components/Recommend.tsx";
 import { useSelector } from "react-redux";
 // import Map from "./components/Map";
@@ -138,11 +138,11 @@ function Index() {
   const InfoCard = () => {
     switch (introData.type) {
       case "activity":
-        return <InfoCardAct data={introData} />;
+        return <InfoCardAct {...introData} />;
       case "spot":
-        return <InfoCardSpot data={introData} />;
+        return <InfoCardSpot {...introData} />;
       default:
-        return <InfoCardRest data={introData} />;
+        return <InfoCardRest {...introData} />;
     }
   };
 

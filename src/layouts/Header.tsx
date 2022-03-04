@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styled, { css } from "@emotion/react";
-import { useDispatch } from "react-redux";
+import styled from "@emotion/styled";
+import { css } from "@emotion/react";
 import { useHistory } from "react-router-dom";
 import { MENU_LIST } from "../config/constant";
-import { setSearchData } from "../store/slice/search";
+import { useDispatch, Search } from "../store/";
 
 const titleStyle = css`
   color: var(--green);
@@ -82,7 +82,11 @@ const MobileMenu = styled.ul`
   }
 `;
 
-const HamburgerComp = styled.div`
+type HamberProps = {
+  active: boolean;
+};
+
+const HamburgerComp = styled.div<HamberProps>`
   width: 40px;
   height: 40px;
   border-radius: 8px;
@@ -131,7 +135,7 @@ export function Header() {
     const dataObj = {
       type: path,
     };
-    dispatch(setSearchData(dataObj));
+    dispatch(Search.setSearchData(dataObj));
     setActive(false);
     history.push("/search");
   };
@@ -148,10 +152,11 @@ export function Header() {
   };
 
   useEffect(() => {
+    const body: HTMLBodyElement = document.getElementsByTagName("body")[0]
     if (active) {
-      document.body.style = "position:fixed";
+      body.style = "position:fixed";
     } else {
-      document.body.style = "";
+      body.style = "";
     }
   }, [active]);
   return (

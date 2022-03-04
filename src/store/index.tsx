@@ -56,3 +56,5 @@ export function StoreProvider({ children }: PropsWithChildren<{}>) {
     </Provider>
   );
 }
+
+export * from "./slice";

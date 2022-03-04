@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -262,7 +262,6 @@ function Index() {
       window.scrollTo(0, 0);
     };
     return () => {
-      // console.log("leave!!!!");
       window.removeEventListener("scroll", scrollEvent);
     };
   }, []);

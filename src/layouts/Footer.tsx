@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 
 const FooterComponent = styled.footer`
   height: 60px;

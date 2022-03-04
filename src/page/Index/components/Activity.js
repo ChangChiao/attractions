@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "@emotion/react";
+import styled from "@emotion/styled";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ListItem from "../../../components/ListItem.tsx";

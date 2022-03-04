@@ -1,8 +1,7 @@
 import React from "react";
-import styled from "@emotion/react";
-import { useDispatch } from "react-redux";
+import styled from "@emotion/styled";
 import { useHistory } from "react-router-dom";
-import { setIntroData } from "../store/slice/intro";
+import { useDispatch, Intro } from "../store/";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 const Card = styled.div`
@@ -37,7 +36,17 @@ const Card = styled.div`
   }
 `;
 
-function ListCard({ data }) {
+type CardProps = {
+  Picture?: {
+    PictureUrl1?: string;
+  };
+  ScenicSpotName?: string;
+  RestaurantName?: string;
+  Address?: string;
+  City?: string;
+};
+
+function ListCard({ data }: { data: CardProps }) {
   const dispatch = useDispatch();
   const history = useHistory();
   const setImage = (Picture = {}) => {
@@ -45,10 +54,9 @@ function ListCard({ data }) {
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/default.png`;
   };
   const handleClick = () => {
-    dispatch(setIntroData(data));
+    dispatch(Intro.setIntroData(data));
     history.push({
       pathname: `/intro`,
-      // state: data,
     });
   };
   return (
@@ -58,7 +66,7 @@ function ListCard({ data }) {
       }}
     >
       <div className="cover">
-        <img src={setImage(data.Picture)} />
+        <img alt="picture" src={setImage(data.Picture)} />
       </div>
       <p className="item-title">{data.ScenicSpotName || data.RestaurantName}</p>
       <p className="location">
