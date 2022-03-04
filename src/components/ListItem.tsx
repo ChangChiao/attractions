@@ -1,7 +1,7 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 import { useDispatch } from "react-redux";
-import { setIntroData } from "../store/slice/introSlice";
+import { setIntroData } from "../store/slice/intro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { transDate } from "../utils/common";

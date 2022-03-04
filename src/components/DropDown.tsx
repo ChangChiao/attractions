@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import styled from "styled-components";
+import styled from "@emotion/react";
 
 const SelectComponent = styled.div`
   width: 300px;

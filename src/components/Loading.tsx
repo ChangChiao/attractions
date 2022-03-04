@@ -1,6 +1,6 @@
 import React from "react";
 import usePortal from "react-useportal";
-import styled from "styled-components";
+import styled from "@emotion/react";
 
 const LoadComp = styled.div`
   position: fixed;

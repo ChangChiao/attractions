@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import styled, { css } from "styled-components";
+import styled, { css } from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { MENU_LIST } from "../global/constant";
-import { setSearchData } from "../store/slice/searchDataSlice";
+import { MENU_LIST } from "../config/constant";
+import { setSearchData } from "../store/slice/search";
 
 const titleStyle = css`
   color: var(--green);
@@ -123,11 +123,11 @@ const HamburgerComp = styled.div`
     transition: all 0.3s ease-in-out;
   }
 `;
-function Header() {
+export function Header() {
   const [active, setActive] = useState(false);
   const history = useHistory();
   const dispatch = useDispatch();
-  const handleClick = (path) => {
+  const handleClick = (path: string) => {
     const dataObj = {
       type: path,
     };
@@ -202,4 +202,3 @@ function Header() {
   );
 }
 
-export default Header;

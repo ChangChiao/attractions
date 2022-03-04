@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 import ListItem from "../../../components/ListItem.tsx";
-import { setSearchData } from "../../../store/slice/searchDataSlice";
+import { setSearchData } from "../../../store/slice/search";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { getActivity } from "../../../utils/api";

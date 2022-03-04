@@ -1,2 +1,2 @@
-export * from "./introSlice";
-export * from "./searchDataSlice";
+export * from "./intro";
+export * from "./search";

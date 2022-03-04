@@ -1,11 +1,11 @@
 import React, { useEffect, useRef, useState } from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 import DatePicker from "react-datepicker";
 import { useSelector, useDispatch } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileAlt } from "@fortawesome/free-solid-svg-icons";
-import { TYPE_LIST } from "../../global/constant";
-import { setSearchData } from "../../store/slice/searchDataSlice";
+import { TYPE_LIST } from "../../config/constant";
+import { setSearchData } from "../../store/slice/search";
 import { getActivity, getSpot, getRestaurant } from "../../utils/api";
 import CitySelect from "../../components/CitySelect.tsx";
 import ListCard from "../../components/ListCard.tsx";

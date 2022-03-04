@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setIntroData } from "../store/slice/introSlice";
+import { setIntroData } from "../store/slice/intro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 const Card = styled.div`

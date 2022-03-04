@@ -1,9 +1,9 @@
 import React from "react";
-import styled from "styled-components";
-import { MENU_LIST } from "../global/constant";
+import styled from "@emotion/react";
+import { MENU_LIST } from "../config/constant";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { setSearchData } from "../store/slice/searchDataSlice";
+import { setSearchData } from "../store/slice/search";
 
 const CrumbComp = styled.div`
   padding-bottom: 20px;

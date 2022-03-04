@@ -18,5 +18,4 @@ export const search = createSlice({
 export const Search = {
   ...search.actions,
   selectSearch: (state: State) => state.intro.searchData,
-}
-
+};

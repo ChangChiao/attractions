@@ -1,6 +1,6 @@
 import React from "react";
-import styled from "styled-components";
-import { CATEGORYLIST } from "../global/constant";
+import styled from "@emotion/react";
+import { CATEGORYLIST } from "../config/constant";
 const CategoryComp = styled.div`
   padding-top: 50px;
   .list {

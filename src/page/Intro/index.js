@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 import Recommend from "../../components/Recommend.tsx";
 import { useSelector } from "react-redux";
 // import Map from "./components/Map";
@@ -9,7 +9,7 @@ import InfoCardAct from "../../components/InfoCardAct.tsx";
 import InfoCardRest from "../../components/InfoCardRest.tsx";
 import InfoCardSpot from "../../components/InfoCardSpot.tsx";
 import Crumb from "../../components/Crumb.tsx";
-import { TYPE_LIST } from "../../global/constant";
+import { TYPE_LIST } from "../../config/constant";
 
 const IntroComp = styled.div`
   margin-top: 30px;

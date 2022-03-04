@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 
 const FooterComponent = styled.footer`
   height: 60px;
@@ -9,8 +9,6 @@ const FooterComponent = styled.footer`
   color: #fff;
 `;
 
-function Footer() {
+export function Footer() {
   return <FooterComponent>The F2E 3rd 台灣旅遊景點導覽</FooterComponent>;
 }
-
-export default Footer;

@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled from "@emotion/react";
 import usePortal from "react-useportal";
 const PopComponent = styled.div`
   position: fixed;
