@@ -1,7 +1,7 @@
-export const API_URL = "https://ptx.transportdata.tw/MOTC/v2/Tourism";
-export const API_SPOT = API_URL + "/ScenicSpot";
-export const API_RESTAURANT = API_URL + "/Restaurant";
-export const API_ACTIVITY = API_URL + "/Activity";
+export const BASE_URL = "https://ptx.transportdata.tw/MOTC/v2/Tourism";
+export const API_SPOT = BASE_URL + "/ScenicSpot";
+export const API_RESTAURANT = BASE_URL + "/Restaurant";
+export const API_ACTIVITY = BASE_URL + "/Activity";
 
 type MenuList = {
   value: string;

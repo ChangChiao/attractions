@@ -75,6 +75,8 @@
     ]
   },
   "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
+    "@types/uuid": "^8.3.4",
     "gh-pages": "^3.2.3",
     "react-app-rewire-scss-loaders": "^0.1.3"
   }

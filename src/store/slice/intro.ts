@@ -1,10 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { State } from "./index";
 
 const initialState = {
   introData: {},
 };
 
-export const introSlice = createSlice({
+export const intro = createSlice({
   name: "intro",
   initialState,
   reducers: {
@@ -14,5 +15,7 @@ export const introSlice = createSlice({
   },
 });
 
-export const { setIntroData } = introSlice.actions;
-export default introSlice.reducer;
+export const Intro = {
+  ...intro.actions,
+  selectQuery: (state: State) => state.intro.introData,
+};

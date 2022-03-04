@@ -1,18 +1,22 @@
-import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
-import reportWebVitals from "./reportWebVitals";
-// import { createBrowserHistory } from "history";
-import { HashRouter, Switch } from "react-router-dom";
 import "./style/main.scss";
 import "react-toastify/dist/ReactToastify.css";
-// const history = createBrowserHistory();
+import { StrictMode } from "react";
+import { StoreProvider } from "./store";
+import { HashRouter, Switch } from "react-router-dom";
+import App from "./App";
+
 ReactDOM.render(
-  <HashRouter>
-    <Switch>
+  <StrictMode>
+    <StoreProvider>
       <App />
-    </Switch>
-  </HashRouter>,
+    </StoreProvider>
+  </StrictMode>,
+  // <HashRouter>
+  //   <Switch>
+  //     <App />
+  //   </Switch>
+  // </HashRouter>,
   document.getElementById("root")
 );
 
