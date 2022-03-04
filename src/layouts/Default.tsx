@@ -1,7 +1,7 @@
-import Header from "./Header";
-import Footer from "./Footer";
+import { Header } from "./Header";
+import { Footer } from "./Footer";
 
-export function DefaultTemp(props) {
+export function Default(props) {
   return (
     <>
       <Header />
