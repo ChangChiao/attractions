@@ -40,7 +40,12 @@ const style = css`
   }
 `;
 
-function Category({ type = "spot", setCategory }) {
+type CategoryProp = {
+  type: string;
+  setCategory: (value: string | ((prevVar: string) => string)) => void;
+};
+
+function Category({ type = "spot", setCategory }: CategoryProp) {
   const selectCategory = (category: string) => {
     if (!category) return;
     setCategory(category);

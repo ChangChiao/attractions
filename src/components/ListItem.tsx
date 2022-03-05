@@ -4,7 +4,7 @@ import { useDispatch, Intro } from "../store/slice/intro";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { transDate } from "../utils/common";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const ListComp = styled.div`
   width: 49%;
   cursor: pointer;
@@ -63,24 +63,23 @@ type ItemProps = {
   Picture?: {
     PictureUrl1?: string;
   };
-  ScenicSpotName?: string;
+  StartTime?: string;
+  ActivityName?: string;
   RestaurantName?: string;
+  EndTime?: string;
   Address?: string;
-  City?: string;
 };
 
 function ListItem({ data }: { data: ItemProps }) {
   const dispatch = useDispatch();
-  const history = useHistory();
-  const setImage = (Picture = {}) => {
-    const { PictureUrl1 } = Picture;
+  const navigate = useNavigate();
+  const setImage = (Picture : { PictureUrl1? : string | undefined } | undefined) => {
+    const { PictureUrl1 } = Picture || {};
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };
   const handleClick = () => {
     dispatch(Intro.setIntroData(data));
-    history.push({
-      pathname: "/intro",
-    });
+    navigate(`/intro`);
   };
   return (
     <ListComp

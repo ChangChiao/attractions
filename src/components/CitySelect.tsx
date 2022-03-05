@@ -1,7 +1,13 @@
 import React from "react";
 import DropDown from "./DropDown";
-import { CITY_LIST } from "../global/constant";
-function CitySelect({ setCity, city }) {
+import { CITY_LIST } from "../config/constant";
+
+type CityProp = {
+  city: string;
+  setCity: (value: string | ((prevVar: string) => string)) => void;
+};
+
+function CitySelect({ city, setCity }: CityProp) {
   return <DropDown defaultValue={city} onChange={setCity} options={CITY_LIST} />;
 }
 

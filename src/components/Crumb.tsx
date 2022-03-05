@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "@emotion/styled";
 import { MENU_LIST } from "../config/constant";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Search, useDispatch } from "../store";
 
 const CrumbComp = styled.div`
@@ -18,7 +17,7 @@ const CrumbComp = styled.div`
 `;
 
 export default function Crumb({ type, title }: { type: string; title: string }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const goPage = (title: string) => {
     let goPath = "";
@@ -32,10 +31,7 @@ export default function Crumb({ type, title }: { type: string; title: string }) 
         dispatch(Search.setSearchData(dataObj));
       }
     });
-    goPath &&
-      history.push({
-        pathname: goPath,
-      });
+    goPath && navigate(goPath);
   };
   return (
     <CrumbComp>

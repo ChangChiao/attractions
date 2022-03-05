@@ -17,9 +17,7 @@ type CatagoryItem = {
 };
 
 type CatagoryList = {
-  activity: CatagoryItem[];
-  spot: CatagoryItem[];
-  restaurant: CatagoryItem[];
+  [key: string]: CatagoryItem[];
 };
 
 export const TYPE_LIST: MenuList[] = [

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { MENU_LIST } from "../config/constant";
 import { useDispatch, Search } from "../store/";
 
@@ -129,7 +129,7 @@ const HamburgerComp = styled.div<HamberProps>`
 `;
 export function Header() {
   const [active, setActive] = useState(false);
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = (path: string) => {
     const dataObj = {
@@ -137,12 +137,12 @@ export function Header() {
     };
     dispatch(Search.setSearchData(dataObj));
     setActive(false);
-    history.push("/search");
+    navigate(`/search`);
   };
 
   const goHome = () => {
     setActive(false);
-    history.push("/");
+    navigate(`/`);
   };
 
   const controlMenu = () => {
@@ -152,7 +152,7 @@ export function Header() {
   };
 
   useEffect(() => {
-    const body: HTMLBodyElement = document.getElementsByTagName("body")[0]
+    const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
     if (active) {
       body.style = "position:fixed";
     } else {

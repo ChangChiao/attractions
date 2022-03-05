@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 import ListCard from "./ListCard";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Search, useDispatch } from "../store/";
@@ -30,17 +30,17 @@ const RecommendComp = styled.div`
 type RecommendProps = {
   title: string;
   list: {}[];
-}
+};
 
 function Recommend({ data }) {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const handleClick = () => {
     const dataObj = {
       type: data?.type,
     };
     dispatch(Search.setSearchData(dataObj));
-    history.push("/search");
+    navigate("/search");
   };
   return (
     <RecommendComp>
