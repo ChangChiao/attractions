@@ -1,20 +1,25 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
-import { useSelector, useDispatch } from "react-redux";
+// import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileAlt } from "@fortawesome/free-solid-svg-icons";
 import { TYPE_LIST } from "../../config/constant";
-import { setSearchData } from "../../store/slice/search";
+import { Search, useDispatch, useSelector } from "../../store";
 import { getActivity, getSpot, getRestaurant } from "../../utils/api";
-import CitySelect from "../../components/CitySelect.tsx";
-import ListCard from "../../components/ListCard.tsx";
-import Crumb from "../../components/Crumb.tsx";
-import Category from "../../components/Category.tsx";
-import Loading from "../../components/Loading.tsx";
+import CitySelect from "../../components/CitySelect";
+import ListCard from "../../components/ListCard";
+import Crumb from "../../components/Crumb";
+import Category from "../../components/Category";
+import Loading from "../../components/Loading";
+import { ActItem, SpotItem, RestItem } from "../../types";
 import "react-datepicker/dist/react-datepicker.css";
 
-const SearchPageComp = styled.div`
+type SearchPageProps = {
+  type: string;
+};
+
+const SearchPageComp = styled.div<SearchPageProps>`
   padding-top: 50px;
   .search-bar {
     display: flex;
@@ -102,18 +107,20 @@ const SearchResultComp = styled.div`
   }
 `;
 
+type AllList = (ActItem & SpotItem & RestItem)[];
+
 function Index() {
   let endFlag = false;
   let skip = 0;
   const dispatch = useDispatch();
-  const [result, setResult] = useState([]);
+  const [result, setResult] = useState<AllList>([]);
   const [city, _setCity] = useState("");
   const [keyword, _setKeyword] = useState("");
   const [category, _setCategory] = useState("");
   const [startDate, _setStartDate] = useState(new Date());
   const [showCategory, _setShowCategory] = useState(true);
   const [pennding, setPennding] = useState(false);
-  const searchData = useSelector((state) => state.search.searchData);
+  const searchData = useSelector(Search.selectSearch);
   const refKeyword = useRef(keyword);
   const refStartDate = useRef(startDate);
   const refCity = useRef(city);
@@ -258,7 +265,7 @@ function Index() {
     window.addEventListener("scroll", scrollEvent);
     window.onbeforeunload = function (e) {
       // console.log("reload!!");
-      dispatch(setSearchData({ type: searchData.type, keyword: "" }));
+      dispatch(Search.setSearchData({ type: searchData.type, keyword: "" }));
       window.scrollTo(0, 0);
     };
     return () => {

@@ -1,8 +1,7 @@
 import axios from "axios";
-import { showToast } from "../utils/common";
+import { showToast } from "./common";
 
 const service = axios.create({});
-
 service.interceptors.request.use(
   (config) => {
     let params = config.params;

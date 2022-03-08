@@ -1,8 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { State } from "./index";
+import { State } from "../index";
 
 const initialState = {
-  searchData: {},
+  searchData: {
+    type: "",
+    keyword: "",
+  },
 };
 
 export const search = createSlice({
@@ -17,5 +20,5 @@ export const search = createSlice({
 
 export const Search = {
   ...search.actions,
-  selectSearch: (state: State) => state.intro.searchData,
+  selectSearch: (state: State) => state.search.searchData,
 };
