@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
-import ListItem from "../../../components/ListItem.tsx";
-import { setSearchData } from "../../../store/slice/search";
+import { useNavigate } from "react-router-dom";
+import ListItem from "../../../components/ListItem";
+import { Search, useDispatch } from "../../../store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { getActivity } from "../../../utils/api";
@@ -29,7 +28,7 @@ const ActComp = styled.div`
 `;
 
 function Activity() {
-  const history = useHistory();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const [list, setList] = useState([]);
   const getAct = async () => {
@@ -45,8 +44,8 @@ function Activity() {
     const dataObj = {
       type: "activity",
     };
-    dispatch(setSearchData(dataObj));
-    history.push("/search");
+    dispatch(Search.setSearchData(dataObj));
+    navigate("/search");
   };
   useEffect(() => {
     getAct();

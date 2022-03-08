@@ -2,6 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, Intro } from "../store/";
+import { SpotItem, RestItem } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 const Card = styled.div`
@@ -36,23 +37,15 @@ const Card = styled.div`
   }
 `;
 
-type CardProps = {
-  Picture?: {
-    PictureUrl1?: string;
-  };
-  ScenicSpotName?: string;
-  RestaurantName?: string;
-  Address?: string;
-  City?: string;
-};
+type CardProps = SpotItem & RestItem;
 
-type KeyCard = keyof CardProps;
-type Value = CardProps[KeyCard];
+// type KeyCard = keyof CardProps;
+// type Value = CardProps[KeyCard];
 
 function ListCard({ data }: { data: CardProps }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const setImage = (Picture : { PictureUrl1? : string | undefined } | undefined) => {
+  const setImage = (Picture: { PictureUrl1?: string | undefined } | undefined) => {
     const { PictureUrl1 } = Picture || {};
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/default.png`;
   };

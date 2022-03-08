@@ -1,10 +1,11 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { useDispatch, Intro } from "../store/slice/intro";
+import { useDispatch, Intro } from "../store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { transDate } from "../utils/common";
 import { useNavigate } from "react-router-dom";
+import { ActItem, RestItem } from "../types";
 const ListComp = styled.div`
   width: 49%;
   cursor: pointer;
@@ -59,21 +60,12 @@ const ListComp = styled.div`
   }
 `;
 
-type ItemProps = {
-  Picture?: {
-    PictureUrl1?: string;
-  };
-  StartTime?: string;
-  ActivityName?: string;
-  RestaurantName?: string;
-  EndTime?: string;
-  Address?: string;
-};
+type ItemProps = ActItem & RestItem;
 
 function ListItem({ data }: { data: ItemProps }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const setImage = (Picture : { PictureUrl1? : string | undefined } | undefined) => {
+  const dispatch = useDispatch();
+  const setImage = (Picture: { PictureUrl1?: string | undefined } | undefined) => {
     const { PictureUrl1 } = Picture || {};
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };
@@ -88,7 +80,7 @@ function ListItem({ data }: { data: ItemProps }) {
       }}
     >
       <div className="cover">
-        <img src={setImage(data.Picture)} />
+        <img alt="cover" src={setImage(data.Picture)} />
       </div>
       <div className="text">
         <p className="date">{`${transDate(data.StartTime)}-${transDate(data.EndTime)}`}</p>

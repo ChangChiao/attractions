@@ -1,13 +1,6 @@
-import React from "react";
+import { RestItem } from "../types";
 
-type RestProps = {
-  OpenTime: string;
-  Phone: string;
-  Address: string;
-  WebsiteUrl: string;
-};
-
-function InfoCardRest({ OpenTime, Phone, Address, WebsiteUrl }: RestProps) {
+function InfoCardRest({ OpenTime, Phone, Address, WebsiteUrl }: RestItem) {
   return (
     <div className="detail">
       <p>

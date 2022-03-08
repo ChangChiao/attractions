@@ -1,12 +1,8 @@
 import React from "react";
 import { transDate } from "../utils/common";
-type ActProps = {
-  StartTime: number;
-  EndTime: number;
-  Organizer: string;
-  Address: string;
-};
-function InfoCardAct({ StartTime, EndTime, Organizer, Address }: ActProps) {
+import { ActItem } from "../types";
+
+function InfoCardAct({ StartTime, EndTime, Organizer, Address }: ActItem) {
   return (
     <div className="detail">
       <p>

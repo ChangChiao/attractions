@@ -1,8 +1,8 @@
 import React from "react";
-import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import { CATEGORYLIST } from "../config/constant";
 
-const style = css`
+const CategoryComp = styled.div`
   padding-top: 50px;
   .list {
     display: flex;
@@ -52,7 +52,7 @@ function Category({ type = "spot", setCategory }: CategoryProp) {
   };
 
   return (
-    <div css={style}>
+    <CategoryComp>
       <h2 className="title">熱門主題</h2>
       <ul className="list">
         {type &&
@@ -71,7 +71,7 @@ function Category({ type = "spot", setCategory }: CategoryProp) {
             );
           })}
       </ul>
-    </div>
+    </CategoryComp>
   );
 }
 

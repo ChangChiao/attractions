@@ -1,14 +1,6 @@
-import React from "react";
+import { SpotItem } from "../types";
 
-type SpotProps = {
-  OpenTime: string;
-  Phone: string;
-  Address: string;
-  TicketInfo: string;
-  Remarks: string;
-};
-
-function InfoCardSpot({ OpenTime, Phone, Address, TicketInfo, Remarks }: SpotProps) {
+function InfoCardSpot({ OpenTime, Phone, Address, TicketInfo, Remarks }: SpotItem) {
   return (
     <div className="detail">
       <p>
