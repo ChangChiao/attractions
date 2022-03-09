@@ -1,7 +1,6 @@
-import React from "react";
-import Select from "react-select";
+import Select, { ActionMeta, GroupBase, OptionsOrGroups, StylesConfig } from "react-select";
 import styled from "@emotion/styled";
-
+import { MenuList } from "../config/constant";
 const SelectComponent = styled.div`
   width: 300px;
   margin-right: 5px;
@@ -15,7 +14,7 @@ const SelectComponent = styled.div`
   }
 `;
 
-const theme = (theme) => ({
+const theme = (theme: { colors: any; spacing: any; borderRadius: number }) => ({
   ...theme,
   borderRadius: 8,
   colors: {
@@ -23,7 +22,7 @@ const theme = (theme) => ({
   },
 });
 
-export const customStyles = {
+export const customStyles: StylesConfig<MenuList, false> = {
   option: (provided, state) => ({
     ...provided,
     borderBottom: "1px dotted #ccc",
@@ -46,7 +45,11 @@ export const customStyles = {
   }),
 };
 
-function DropDown(props) {
+function DropDown(props: {
+  defaultValue: string;
+  onChange: ((newValue: any, actionMeta: ActionMeta<any>) => void) | undefined;
+  options: OptionsOrGroups<any, GroupBase<MenuList>> | undefined;
+}) {
   return (
     <SelectComponent>
       <Select defaultValue={props.defaultValue} theme={theme} styles={customStyles} onChange={props.onChange} options={props.options} />

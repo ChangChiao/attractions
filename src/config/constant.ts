@@ -3,7 +3,7 @@ export const API_SPOT = BASE_URL + "/ScenicSpot";
 export const API_RESTAURANT = BASE_URL + "/Restaurant";
 export const API_ACTIVITY = BASE_URL + "/Activity";
 
-type MenuList = {
+export type MenuList = {
   value: string;
   label: string;
 };
