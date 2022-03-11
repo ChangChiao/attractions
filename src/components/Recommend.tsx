@@ -29,7 +29,7 @@ const RecommendComp = styled.div`
 type RecommendProps = {
   title: string;
   type: string;
-  list: (SpotItem & RestItem)[];
+  list: (SpotItem | RestItem)[];
   // list: SpotItem[];
 };
 

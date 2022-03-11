@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import Recommend from "../../components/Recommend.tsx";
-import { useSelector } from "react-redux";
+import Recommend from "../../components/Recommend";
+import { useSelector, Intro } from "../../store";
 // import Map from "./components/Map";
 import { getActivity, getSpot, getRestaurant } from "../../utils/api";
-import MapIframe from "./components/MapIframe.tsx";
-import InfoCardAct from "../../components/InfoCardAct.tsx";
-import InfoCardRest from "../../components/InfoCardRest.tsx";
-import InfoCardSpot from "../../components/InfoCardSpot.tsx";
-import Crumb from "../../components/Crumb.tsx";
+import MapIframe from "./components/MapIframe";
+import InfoCardAct from "../../components/InfoCardAct";
+import InfoCardRest from "../../components/InfoCardRest";
+import InfoCardSpot from "../../components/InfoCardSpot";
+import Crumb from "../../components/Crumb";
 import { TYPE_LIST } from "../../config/constant";
-
+import { SpotItem, RestItem, ActItem } from "../../types/apiType";
 const IntroComp = styled.div`
   margin-top: 30px;
   .main-cover {
@@ -80,12 +80,18 @@ const IntroComp = styled.div`
     }
   }
 `;
+
+type recommend = {
+  type: string;
+  title: string;
+  list: (ActItem | SpotItem | RestItem)[];
+};
 function Index() {
   // const { state } = useLocation();
-  const [recommend, setRecommend] = useState({});
+  const [recommend, setRecommend] = useState<recommend | {}>({});
   const [tag, setTag] = useState([]);
   const [title, setTitle] = useState("");
-  const introData = useSelector((state) => state.intro.introData);
+  const introData = useSelector(Intro.selectIntro);
   const saveState = () => {
     // if (!state) {
     //   const data = localStorage.getItem("intro");
@@ -100,7 +106,7 @@ function Index() {
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };
 
-  const randomNum = (x) => {
+  const randomNum = (x: number) => {
     const num = Math.floor(Math.random() * x) + 1;
     return num * 4;
   };
@@ -115,15 +121,15 @@ function Index() {
     switch (introData.type) {
       case "activity":
         title = "活動";
-        result = await getActivity(sendData);
+        result = (await getActivity(sendData)) as ActItem[];
         break;
       case "spot":
         title = "景點";
-        result = await getSpot(sendData);
+        result = (await getSpot(sendData)) as SpotItem[];
         break;
       default:
         title = "餐廳";
-        result = await getRestaurant(sendData);
+        result = (await getRestaurant(sendData)) as RestItem[];
         break;
     }
 

@@ -1,6 +1,6 @@
 export type ActItem = {
+  type?: string;
   ActivityID: string;
-  type: string;
   Class: string;
   StartTime: string;
   EndTime: string;
@@ -20,7 +20,7 @@ export type ActItem = {
 };
 
 export type SpotItem = {
-  type: string;
+  type?: string;
   ScenicSpotID: string;
   Class: string;
   ScenicSpotName: string;
@@ -41,7 +41,7 @@ export type SpotItem = {
 };
 
 export type RestItem = {
-  type: string;
+  type?: string;
   RestaurantID: string;
   RestaurantName: string;
   Class: string;

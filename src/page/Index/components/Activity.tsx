@@ -6,6 +6,7 @@ import { Search, useDispatch } from "../../../store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { getActivity } from "../../../utils/api";
+import { ActItem } from "../../../types";
 const ActComp = styled.div`
   margin-top: 30px;
   .title-bar {
@@ -30,14 +31,14 @@ const ActComp = styled.div`
 function Activity() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [list, setList] = useState([]);
+  const [list, setList] = useState<ActItem[]>([]);
   const getAct = async () => {
     const sendData = {
       $top: 4,
       $orderBy: "EndTime desc",
       $filter: "Picture/PictureUrl1 ne null",
     };
-    const result = await getActivity(sendData);
+    const result = (await getActivity(sendData)) as ActItem[];
     setList(result);
   };
   const handleClick = () => {

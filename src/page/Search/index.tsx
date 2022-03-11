@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
-// import { useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileAlt } from "@fortawesome/free-solid-svg-icons";
 import { TYPE_LIST } from "../../config/constant";
@@ -107,7 +106,7 @@ const SearchResultComp = styled.div`
   }
 `;
 
-type AllList = (ActItem & SpotItem & RestItem)[];
+type AllList = (ActItem | SpotItem | RestItem)[];
 
 function Index() {
   let endFlag = false;
@@ -225,13 +224,13 @@ function Index() {
     try {
       switch (searchData.type) {
         case "activity":
-          list = await getActivity(sendData);
+          list = (await getActivity(sendData)) as ActItem[];
           break;
         case "spot":
-          list = await getSpot(sendData);
+          list = (await getSpot(sendData)) as SpotItem[];
           break;
         default:
-          list = await getRestaurant(sendData);
+          list = (await getRestaurant(sendData)) as RestItem[];
           break;
       }
       setPennding(false);

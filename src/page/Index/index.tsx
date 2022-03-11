@@ -1,17 +1,30 @@
 import React, { useEffect, useState } from "react";
-import Slider from "./components/Slider.tsx";
-import Search from "./components/Search.tsx";
-import Activity from "./components/Activity.tsx";
-import Recommend from "../../components/Recommend.tsx";
+import Slider from "./components/Slider";
+import Search from "./components/Search";
+import Activity from "./components/Activity";
+import Recommend from "../../components/Recommend";
+import { SpotItem, RestItem } from "../../types/apiType";
 import { getSpot, getRestaurant } from "../../utils/api";
 
+type SpotList = {
+  title: string;
+  type: string;
+  list: SpotItem[];
+};
+
+type RestList = {
+  title: string;
+  type: string;
+  list: RestItem[];
+};
+
 function Index() {
-  const [spotList, setSpotList] = useState({
+  const [spotList, setSpotList] = useState<SpotList>({
     title: "熱門打卡景點",
     type: "spot",
     list: [],
   });
-  const [restList, setRestList] = useState({
+  const [restList, setRestList] = useState<RestList>({
     title: "一再回訪美食",
     type: "restaurant",
     list: [],
@@ -21,7 +34,7 @@ function Index() {
       $top: 4,
       $filter: "Picture/PictureUrl1 ne null",
     };
-    let result = await getSpot(sendData);
+    let result = (await getSpot(sendData)) as SpotItem[];
     setSpotList((prevState) => ({
       ...prevState,
       list: result,
@@ -33,7 +46,7 @@ function Index() {
       $top: 4,
       $filter: "Picture/PictureUrl1 ne null",
     };
-    let result = await getRestaurant(sendData);
+    let result = (await getRestaurant(sendData)) as RestItem[];
     setRestList((prevState) => ({
       ...prevState,
       list: result,

@@ -1,7 +1,7 @@
 import api from "./http";
 import { API_SPOT, API_RESTAURANT, API_ACTIVITY } from "../config/constant";
 import jsSHA from "jssha";
-
+import { ActItem, SpotItem, RestItem } from "../types";
 const getAuthorizationHeader = () => {
   let AppID = process.env.REACT_APP_ID;
   let AppKey = process.env.REACT_APP_KEY as string;
@@ -21,9 +21,10 @@ const getAuthorizationHeader = () => {
 
 type sendData = {
   $top: number;
-  $skip: number;
   $filter: string;
-  city: string;
+  $skip?: number;
+  $orderBy?: string;
+  city?: string;
 };
 
 const getCity = (data: sendData) => {
@@ -36,7 +37,7 @@ const getCity = (data: sendData) => {
   };
 };
 
-export const getRestaurant = (sendData: sendData) => {
+export const getRestaurant = (sendData: sendData): Promise<RestItem[] | null> => {
   const { cityPath, ...data } = getCity(sendData);
   let config = {
     headers: getAuthorizationHeader(),
@@ -47,7 +48,7 @@ export const getRestaurant = (sendData: sendData) => {
   return api.get(API_RESTAURANT + `/${cityPath}`, config);
 };
 
-export const getSpot = (sendData: sendData) => {
+export const getSpot = (sendData: sendData): Promise<SpotItem[] | null> => {
   const { cityPath, ...data } = getCity(sendData);
   let config = {
     headers: getAuthorizationHeader(),
@@ -58,7 +59,7 @@ export const getSpot = (sendData: sendData) => {
   return api.get(API_SPOT + `/${cityPath}`, config);
 };
 
-export const getActivity = (sendData: sendData) => {
+export const getActivity = (sendData: sendData): Promise<ActItem[] | null> => {
   const { cityPath, ...data } = getCity(sendData);
   let config = {
     headers: getAuthorizationHeader(),

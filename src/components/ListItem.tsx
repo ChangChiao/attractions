@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { transDate } from "../utils/common";
 import { useNavigate } from "react-router-dom";
-import { ActItem, RestItem } from "../types";
+import { ActItem } from "../types";
 const ListComp = styled.div`
   width: 49%;
   cursor: pointer;
@@ -60,7 +60,7 @@ const ListComp = styled.div`
   }
 `;
 
-type ItemProps = ActItem & RestItem;
+type ItemProps = ActItem;
 
 function ListItem({ data }: { data: ItemProps }) {
   const navigate = useNavigate();
@@ -83,8 +83,8 @@ function ListItem({ data }: { data: ItemProps }) {
         <img alt="cover" src={setImage(data.Picture)} />
       </div>
       <div className="text">
-        <p className="date">{`${transDate(data.StartTime)}-${transDate(data.EndTime)}`}</p>
-        <p className="item-title">{data.ActivityName || data.RestaurantName}</p>
+        {data.ActivityName && <p className="date">{`${transDate(data.StartTime)}-${transDate(data.EndTime)}`}</p>}
+        <p className="item-title">{data.ActivityName}</p>
         <p className="bottom-info">
           <span className="location">
             <FontAwesomeIcon className="mark" icon={faMapMarkerAlt} />
