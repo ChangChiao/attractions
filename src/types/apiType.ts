@@ -60,8 +60,16 @@ export type RestItem = {
   };
 };
 
+export type allType = ActItem | SpotItem | RestItem;
+
 export enum typeList {
   activity = "Activity",
   spot = "ScenicSpot",
   restaurant = "Restaurant",
 }
+
+export type PicType = {
+  Picture?: {
+    PictureUrl1?: string;
+  };
+};

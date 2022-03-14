@@ -16,7 +16,7 @@ const CrumbComp = styled.div`
   }
 `;
 
-export default function Crumb({ type, title }: { type: string; title: string }) {
+export default function Crumb({ type, title }: { type: string | undefined; title: string }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const goPage = (title: string) => {

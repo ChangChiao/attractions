@@ -3,12 +3,12 @@ export const API_SPOT = BASE_URL + "/ScenicSpot";
 export const API_RESTAURANT = BASE_URL + "/Restaurant";
 export const API_ACTIVITY = BASE_URL + "/Activity";
 
-export type MenuList = {
+export type MenuItem = {
   value: string;
   label: string;
 };
 
-type CityList = MenuList;
+type CityList = MenuItem;
 
 type CatagoryItem = {
   keyword: string;
@@ -20,7 +20,7 @@ type CatagoryList = {
   [key: string]: CatagoryItem[];
 };
 
-export const TYPE_LIST: MenuList[] = [
+export const TYPE_LIST: MenuItem[] = [
   { value: "activity", label: "節慶活動" },
   { value: "spot", label: "探索景點" },
   { value: "restaurant", label: "品嚐美食" },

@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Search, useDispatch } from "../store/";
-import { SpotItem, RestItem } from "../types";
+import { allType } from "../types";
 const RecommendComp = styled.div`
   margin-top: 50px;
   .title-bar {
@@ -27,10 +27,9 @@ const RecommendComp = styled.div`
 `;
 
 type RecommendProps = {
-  title: string;
-  type: string;
-  list: (SpotItem | RestItem)[];
-  // list: SpotItem[];
+  title?: string;
+  type?: string;
+  list?: allType[];
 };
 
 function Recommend({ title, type, list }: RecommendProps) {

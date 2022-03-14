@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, useCallback } from "react";
 import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -11,7 +11,7 @@ import ListCard from "../../components/ListCard";
 import Crumb from "../../components/Crumb";
 import Category from "../../components/Category";
 import Loading from "../../components/Loading";
-import { ActItem, SpotItem, RestItem } from "../../types";
+import { ActItem, SpotItem, RestItem, MenuItem } from "../../types";
 import "react-datepicker/dist/react-datepicker.css";
 
 type SearchPageProps = {
@@ -157,10 +157,10 @@ function Index() {
     restaurant: "你想吃什麼？",
   };
 
-  const getCrumb = () => {
-    const { label } = TYPE_LIST.find((vo) => vo.value === searchData.type);
-    return label;
-  };
+  const getCrumb = useCallback((): string => {
+    const target = TYPE_LIST.find((vo) => vo.value === searchData.type) as MenuItem;
+    return target.label;
+  }, [searchData]);
 
   const saveSearchData = () => {
     setCategory("");
@@ -205,8 +205,9 @@ function Index() {
       return "RestaurantName";
     }
   };
-  const getData = async () => {
-    let list = [];
+
+  const getData = useCallback(async () => {
+    let list: string | any[] = [];
     let [month, year] = searchData.type === "activity" ? transDate(refStartDate.current) : [];
     let nameStr = refKeyword.current ? `contains(${getQueryName()},'${keyword}')` : "";
     let monthStr = month ? `month(StartTime) eq ${month}` : "";
@@ -244,7 +245,7 @@ function Index() {
       endFlag = true;
       setPennding(false);
     }
-  };
+  }, [searchData]);
 
   const loadMore = () => {
     if (endFlag) return;
@@ -284,7 +285,7 @@ function Index() {
     setResult([]);
     getCrumb();
     // console.log("searchData--change", searchData);
-  }, [searchData]);
+  }, [searchData, getData, getCrumb]);
 
   useEffect(() => {
     if (category) {
@@ -292,7 +293,7 @@ function Index() {
       setResult([]);
       getData();
     }
-  }, [category]);
+  }, [category, getData]);
 
   return (
     <SearchPageComp type={searchData.type}>

@@ -10,7 +10,7 @@ import InfoCardRest from "../../components/InfoCardRest";
 import InfoCardSpot from "../../components/InfoCardSpot";
 import Crumb from "../../components/Crumb";
 import { TYPE_LIST } from "../../config/constant";
-import { SpotItem, RestItem, ActItem } from "../../types/apiType";
+import { SpotItem, RestItem, ActItem, allType, PicType } from "../../types/apiType";
 const IntroComp = styled.div`
   margin-top: 30px;
   .main-cover {
@@ -84,14 +84,15 @@ const IntroComp = styled.div`
 type recommend = {
   type: string;
   title: string;
-  list: (ActItem | SpotItem | RestItem)[];
+  list: allType[];
 };
+
 function Index() {
   // const { state } = useLocation();
   const [recommend, setRecommend] = useState<recommend | {}>({});
-  const [tag, setTag] = useState([]);
+  const [tag, setTag] = useState<string[]>([]);
   const [title, setTitle] = useState("");
-  const introData = useSelector(Intro.selectIntro);
+  const introData = useSelector(Intro.selectIntro) as allType;
   const saveState = () => {
     // if (!state) {
     //   const data = localStorage.getItem("intro");
@@ -101,9 +102,9 @@ function Index() {
     // localStorage.setItem("intro", JSON.stringify(state));
     // setData(state);
   };
-  const setImage = (Picture = {}) => {
-    const { PictureUrl1 } = Picture;
-    return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
+  const setImage = (Picture: PicType) => {
+    // const { PictureUrl1 } = Picture;
+    return Picture.PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };
 
   const randomNum = (x: number) => {
@@ -142,14 +143,21 @@ function Index() {
   };
 
   const InfoCard = () => {
-    switch (introData.type) {
-      case "activity":
-        return <InfoCardAct {...introData} />;
-      case "spot":
-        return <InfoCardSpot {...introData} />;
-      default:
-        return <InfoCardRest {...introData} />;
-    }
+    return typeGuardAct(introData) ? (
+      <InfoCardAct {...introData} />
+    ) : typeGuardSpot(introData) ? (
+      <InfoCardSpot {...introData} />
+    ) : (
+      <InfoCardRest {...introData} />
+    );
+    // switch (true) {
+    //   case typeGuardAct(introData):
+    //     return <InfoCardAct {...introData} />;
+    //   case "spot":
+    //     return <InfoCardSpot />;
+    //   default:
+    //     return <InfoCardRest />;
+    // }
   };
 
   const getTag = () => {
@@ -160,15 +168,29 @@ function Index() {
     if (arr.length === 0) arr.push("#熱門打卡");
     setTag(arr);
   };
-  const getCrumb = () => {
-    if (!introData.type) return "";
-    const { label } = TYPE_LIST.find((vo) => vo.value === introData.type);
-    return label;
+  const getCrumb = (): string | undefined => {
+    if (!introData.type) return undefined;
+    const label = TYPE_LIST.find((vo) => vo.value === introData.type);
+    return label && label.value;
   };
 
-  const getTitle = (data) => {
-    const { ActivityName, ScenicSpotName, RestaurantName } = data;
-    return ActivityName || ScenicSpotName || RestaurantName;
+  // const typeGuard = <T> (key: string): introData is T => {
+  //   return key in T;
+  // }
+  const typeGuardAct = (introData: allType): introData is ActItem => {
+    return introData.hasOwnProperty("ActivityID");
+  };
+
+  const typeGuardSpot = (introData: allType): introData is SpotItem => {
+    return introData.hasOwnProperty("ScenicSpotID");
+  };
+
+  // const typeGuardRest = (introData: allType): introData is RestItem => {
+  //   return introData.hasOwnProperty("RestaurantID");
+  // };
+
+  const getTitle = (data: allType) => {
+    return typeGuardAct(data) ? data.ActivityName : typeGuardSpot(data) ? data.ScenicSpotName : data.RestaurantName;
   };
 
   useEffect(() => {
@@ -196,7 +218,7 @@ function Index() {
       </div>
       <div className="content">
         <h3 className="focus">{title}介紹:</h3>
-        <p>{introData.type === "spot" ? introData.DescriptionDetail : introData.Description}</p>
+        <p>{typeGuardSpot(introData) ? introData.DescriptionDetail : introData.Description}</p>
       </div>
       <div className="intro">
         <InfoCard />
@@ -205,7 +227,7 @@ function Index() {
           {/* <Map Position={introData.Position} /> */}
         </div>
       </div>
-      <Recommend data={recommend} />
+      <Recommend {...recommend} />
     </IntroComp>
   );
 }
