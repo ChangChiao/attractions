@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileAlt } from "@fortawesome/free-solid-svg-icons";
-import { MENU_LIST } from "../../config/constant";
+import { MENU_LIST, MenuItem } from "../../config/constant";
 import { Search, useDispatch, useSelector } from "../../store";
 import { getActivity, getSpot, getRestaurant } from "../../utils/api";
 import CitySelect from "../../components/CitySelect";
@@ -11,7 +11,7 @@ import ListCard from "../../components/ListCard";
 import Crumb from "../../components/Crumb";
 import Category from "../../components/Category";
 import Loading from "../../components/Loading";
-import { ActItem, SpotItem, RestItem, MenuItem } from "../../types";
+import { ActItem, SpotItem, RestItem } from "../../types";
 import "react-datepicker/dist/react-datepicker.css";
 
 type SearchPageProps = {

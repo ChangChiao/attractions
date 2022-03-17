@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Search, useDispatch } from "../store/";
 import { allType } from "../types";
+import { typeGuardAct, typeGuardSpot } from "../utils/typeGuard";
 const RecommendComp = styled.div`
   margin-top: 50px;
   .title-bar {
@@ -42,6 +43,9 @@ function Recommend({ title, type, list }: RecommendProps) {
     dispatch(Search.setSearchData(dataObj));
     navigate("/search");
   };
+  const getId = (data: allType) => {
+    return typeGuardAct(data) ? data.ActivityName : typeGuardSpot(data) ? data.ScenicSpotName : data.RestaurantName;
+  };
   return (
     <RecommendComp>
       <div className="title-bar">
@@ -54,7 +58,7 @@ function Recommend({ title, type, list }: RecommendProps) {
       <div className="list">
         {list &&
           list.map((vo) => {
-            return <ListCard data={{ ...vo, type }} key={vo.ScenicSpotID || vo.RestaurantID} />;
+            return <ListCard data={{ ...vo, type }} key={getId(vo)} />;
           })}
       </div>
     </RecommendComp>

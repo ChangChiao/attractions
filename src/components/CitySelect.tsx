@@ -8,7 +8,7 @@ type CityProp = {
 };
 
 function CitySelect({ city, setCity }: CityProp) {
-  return <DropDown defaultValue={city} onChange={setCity} options={CITY_LIST} />;
+  return <DropDown value={city} onChange={setCity} options={CITY_LIST} />;
 }
 
 export default CitySelect;

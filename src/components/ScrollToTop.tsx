@@ -1,17 +1,19 @@
-import React, { useEffect, Fragment } from "react";
-import { withRouter } from "react-router-dom";
+import { useEffect, useState } from "react";
 
-function ScrollToTop({ history, children }) {
+function ScrollToTop() {
+  const [isVisable, setIsVisable] = useState(false);
+
+  const toggleVisibility = () => setIsVisable(window.scrollY > 200);
+
+  const scrollToTop = () => window.scroll({ top: 0 });
+
   useEffect(() => {
-    const unlisten = history.listen(() => {
-      window.scrollTo(0, 0);
-    });
-    return () => {
-      unlisten();
-    };
-  }, []);
+    window.addEventListener("scroll", toggleVisibility);
 
-  return <Fragment>{children}</Fragment>;
+    return () => window.removeEventListener("scroll", toggleVisibility);
+  }, [toggleVisibility]);
+
+  return <div onClick={scrollToTop}>up</div>;
 }
 
-export default withRouter(ScrollToTop);
+export default ScrollToTop;

@@ -68,7 +68,7 @@ const PopComponent = styled.div`
   }
 `;
 
-function Popup(props) {
+function Popup(props: any) {
   const { Portal } = usePortal({
     onOpen({ portal }) {
       portal.current.style.cssText = `

@@ -16,17 +16,17 @@ const CrumbComp = styled.div`
   }
 `;
 
-export default function Crumb({ type, title }: { type: string | undefined; title: string }) {
+export default function Crumb({ type, title }: { type: string; title: string }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const goPage = (title: string) => {
     let goPath = "";
     if (title === "首頁") goPath = "/";
     MENU_LIST.forEach((element) => {
-      if (element.name === title) {
+      if (element.label === title) {
         goPath = "/search";
         const dataObj = {
-          type: element.path,
+          type: element.value,
         };
         dispatch(Search.setSearchData(dataObj));
       }

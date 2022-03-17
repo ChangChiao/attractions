@@ -11,6 +11,7 @@ import InfoCardSpot from "../../components/InfoCardSpot";
 import Crumb from "../../components/Crumb";
 import { MENU_LIST } from "../../config/constant";
 import { SpotItem, RestItem, ActItem, allType, PicType } from "../../types/apiType";
+import { typeGuardAct, typeGuardSpot } from "../../utils/typeGuard";
 const IntroComp = styled.div`
   margin-top: 30px;
   .main-cover {
@@ -160,18 +161,6 @@ function Index() {
   // const typeGuard = <T> (key: string): introData is T => {
   //   return key in T;
   // }
-  const typeGuardAct = (introData: allType): introData is ActItem => {
-    return introData.hasOwnProperty("ActivityID");
-  };
-
-  const typeGuardSpot = (introData: allType): introData is SpotItem => {
-    return introData.hasOwnProperty("ScenicSpotID");
-  };
-
-  // const typeGuardRest = (introData: allType): introData is RestItem => {
-  //   return introData.hasOwnProperty("RestaurantID");
-  // };
-
   const getTitle = (data: allType) => {
     return typeGuardAct(data) ? data.ActivityName : typeGuardSpot(data) ? data.ScenicSpotName : data.RestaurantName;
   };

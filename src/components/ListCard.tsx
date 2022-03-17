@@ -2,9 +2,10 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, Intro } from "../store/";
-import { SpotItem, RestItem, ActItem, allType } from "../types";
+import { allType } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
+import { typeGuardAct, typeGuardSpot } from "../utils/typeGuard";
 const Card = styled.div`
   width: 24%;
   cursor: pointer;
@@ -52,13 +53,6 @@ function ListCard({ data }: { data: CardProps }) {
   const handleClick = () => {
     dispatch(Intro.setIntroData(data));
     navigate(`/intro`);
-  };
-  const typeGuardAct = (introData: allType): introData is ActItem => {
-    return introData.hasOwnProperty("ActivityID");
-  };
-
-  const typeGuardSpot = (introData: allType): introData is SpotItem => {
-    return introData.hasOwnProperty("ScenicSpotID");
   };
 
   const getTitle = (data: allType) => {
