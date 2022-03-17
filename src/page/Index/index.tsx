@@ -62,8 +62,8 @@ function Index() {
       <Search />
       <Slider />
       <Activity />
-      <Recommend data={spotList} />
-      <Recommend data={restList} />
+      <Recommend {...spotList} />
+      <Recommend {...restList} />
     </div>
   );
 }

@@ -20,16 +20,10 @@ type CatagoryList = {
   [key: string]: CatagoryItem[];
 };
 
-export const TYPE_LIST: MenuItem[] = [
-  { value: "activity", label: "節慶活動" },
-  { value: "spot", label: "探索景點" },
-  { value: "restaurant", label: "品嚐美食" },
-];
-
-export const MENU_LIST = [
-  { name: "探索景點", path: "spot" },
-  { name: "節慶活動", path: "activity" },
-  { name: "品嚐美食", path: "restaurant" },
+export const MENU_LIST: MenuItem[] = [
+  { label: "探索景點", value: "spot" },
+  { label: "節慶活動", value: "activity" },
+  { label: "品嚐美食", value: "restaurant" },
 ];
 
 export const CITY_LIST: CityList[] = [

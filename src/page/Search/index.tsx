@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileAlt } from "@fortawesome/free-solid-svg-icons";
-import { TYPE_LIST } from "../../config/constant";
+import { MENU_LIST } from "../../config/constant";
 import { Search, useDispatch, useSelector } from "../../store";
 import { getActivity, getSpot, getRestaurant } from "../../utils/api";
 import CitySelect from "../../components/CitySelect";
@@ -158,7 +158,7 @@ function Index() {
   };
 
   const getCrumb = useCallback((): string => {
-    const target = TYPE_LIST.find((vo) => vo.value === searchData.type) as MenuItem;
+    const target = MENU_LIST.find((vo) => vo.value === searchData.type) as MenuItem;
     return target.label;
   }, [searchData]);
 

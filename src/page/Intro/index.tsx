@@ -9,7 +9,7 @@ import InfoCardAct from "../../components/InfoCardAct";
 import InfoCardRest from "../../components/InfoCardRest";
 import InfoCardSpot from "../../components/InfoCardSpot";
 import Crumb from "../../components/Crumb";
-import { TYPE_LIST } from "../../config/constant";
+import { MENU_LIST } from "../../config/constant";
 import { SpotItem, RestItem, ActItem, allType, PicType } from "../../types/apiType";
 const IntroComp = styled.div`
   margin-top: 30px;
@@ -93,15 +93,6 @@ function Index() {
   const [tag, setTag] = useState<string[]>([]);
   const [title, setTitle] = useState("");
   const introData = useSelector(Intro.selectIntro) as allType;
-  const saveState = () => {
-    // if (!state) {
-    //   const data = localStorage.getItem("intro");
-    //   setData(JSON.parse(data));
-    //   return;
-    // }
-    // localStorage.setItem("intro", JSON.stringify(state));
-    // setData(state);
-  };
   const setImage = (Picture: PicType) => {
     // const { PictureUrl1 } = Picture;
     return Picture.PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
@@ -150,14 +141,6 @@ function Index() {
     ) : (
       <InfoCardRest {...introData} />
     );
-    // switch (true) {
-    //   case typeGuardAct(introData):
-    //     return <InfoCardAct {...introData} />;
-    //   case "spot":
-    //     return <InfoCardSpot />;
-    //   default:
-    //     return <InfoCardRest />;
-    // }
   };
 
   const getTag = () => {
@@ -170,7 +153,7 @@ function Index() {
   };
   const getCrumb = (): string | undefined => {
     if (!introData.type) return undefined;
-    const label = TYPE_LIST.find((vo) => vo.value === introData.type);
+    const label = MENU_LIST.find((vo) => vo.value === introData.type);
     return label && label.value;
   };
 

@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import DropDown from "../../../components/DropDown.tsx";
+import DropDown from "../../../components/DropDown";
 import styled from "@emotion/styled";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { setSearchData } from "../../../store/slice/search";
-import { TYPE_LIST } from "../../../config/constant";
+import { Search as SearchSlice, useDispatch } from "../../../store/";
+import { MENU_LIST } from "../../../config/constant";
 
 const TitleComp = styled.div`
   text-align: left;
@@ -84,17 +83,17 @@ const TitleComp = styled.div`
 
 function Search() {
   const dispatch = useDispatch();
-  const history = useHistory();
+  const navigate = useNavigate();
   const [keyword, setKeyword] = useState("");
-  const [selectedOption, setSelectedOption] = useState(TYPE_LIST[1]);
+  const [selectedOption, setSelectedOption] = useState(MENU_LIST[1]?.value);
 
   const saveSearchData = () => {
     const dataObj = {
       keyword,
-      type: selectedOption?.value,
+      type: selectedOption,
     };
-    dispatch(setSearchData(dataObj));
-    history.push("/search");
+    dispatch(SearchSlice.setSearchData(dataObj));
+    navigate("/search");
   };
 
   return (
@@ -110,7 +109,7 @@ function Search() {
         </p>
       </div>
       <div className="area">
-        <DropDown defaultValue={selectedOption} onChange={setSelectedOption} options={TYPE_LIST} />
+        <DropDown value={selectedOption} onChange={setSelectedOption} options={MENU_LIST} />
         <input
           className="search-input"
           placeholder="你想去哪裡？請輸入關鍵字"

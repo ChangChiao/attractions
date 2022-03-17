@@ -2,7 +2,7 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, Intro } from "../store/";
-import { SpotItem, RestItem } from "../types";
+import { SpotItem, RestItem, ActItem, allType } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 const Card = styled.div`
@@ -37,7 +37,7 @@ const Card = styled.div`
   }
 `;
 
-type CardProps = SpotItem & RestItem;
+type CardProps = allType;
 
 // type KeyCard = keyof CardProps;
 // type Value = CardProps[KeyCard];
@@ -53,6 +53,17 @@ function ListCard({ data }: { data: CardProps }) {
     dispatch(Intro.setIntroData(data));
     navigate(`/intro`);
   };
+  const typeGuardAct = (introData: allType): introData is ActItem => {
+    return introData.hasOwnProperty("ActivityID");
+  };
+
+  const typeGuardSpot = (introData: allType): introData is SpotItem => {
+    return introData.hasOwnProperty("ScenicSpotID");
+  };
+
+  const getTitle = (data: allType) => {
+    return typeGuardAct(data) ? data.ActivityName : typeGuardSpot(data) ? data.ScenicSpotName : data.RestaurantName;
+  };
   return (
     <Card
       onClick={() => {
@@ -62,7 +73,7 @@ function ListCard({ data }: { data: CardProps }) {
       <div className="cover">
         <img alt="picture" src={setImage(data.Picture)} />
       </div>
-      <p className="item-title">{data.ScenicSpotName || data.RestaurantName}</p>
+      <p className="item-title">{getTitle(data)}</p>
       <p className="location">
         <FontAwesomeIcon className="mark" icon={faMapMarkerAlt} />
         {data.Address || data.City}

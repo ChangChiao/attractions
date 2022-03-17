@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { State } from "./index";
+import { State } from "../index";
 
 const initialState = {
   introData: {},
@@ -17,5 +17,5 @@ export const intro = createSlice({
 
 export const Intro = {
   ...intro.actions,
-  selectQuery: (state: State) => state.intro.introData,
+  selectIntro: (state: State) => state.intro.introData,
 };
