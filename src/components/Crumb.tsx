@@ -1,17 +1,18 @@
 import styled from "@emotion/styled";
-import { MENU_LIST } from "../config/constant";
+import { MENU_LIST } from "../global/constant";
 import { useNavigate } from "react-router-dom";
 import { Search, useDispatch } from "../store";
+import { COLOR } from "../style";
 
 const CrumbComp = styled.div`
   padding-bottom: 20px;
   font-size: 14px;
   .crumb-text {
-    color: var(--green);
+    color: ${COLOR.green};
     cursor: pointer;
   }
   strong {
-    color: var(--green);
+    color: ${COLOR.green};
     margin: 0 5px;
   }
 `;

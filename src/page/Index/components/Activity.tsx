@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { getActivity } from "../../../utils/api";
 import { ActItem } from "../../../types";
+import { MEDIA_QUERY } from "@/style";
 const ActComp = styled.div`
   margin-top: 30px;
   .title-bar {
@@ -22,7 +23,7 @@ const ActComp = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 10px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       display: block;
     }
   }

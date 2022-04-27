@@ -5,19 +5,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { transDate } from "../utils/common";
 import { useNavigate } from "react-router-dom";
-import { ActItem } from "../types";
+import { ActItem, PicType } from "../types";
+import { MEDIA_QUERY, COLOR } from "@/style";
 const ListComp = styled.div`
   width: 49%;
   cursor: pointer;
   display: flex;
   overflow: hidden;
-  border: 1px solid var(--line);
+  border: 1px solid ${COLOR.line};
   border-radius: 12px;
   margin-top: 10px;
-  background-color: var(--gray);
+  background-color: ${COLOR.gray};
   transition-duration: 0.3s;
   height: 120px;
-  @media (max-width: 980px) {
+  ${MEDIA_QUERY.lg} {
     width: 100%;
   }
   &:hover {
@@ -30,7 +31,7 @@ const ListComp = styled.div`
   .cover {
     width: 150px;
     overflow: hidden;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       width: 80px;
     }
     img {
@@ -54,7 +55,7 @@ const ListComp = styled.div`
     bottom: 10px;
   }
   .intro {
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       display: none;
     }
   }
@@ -65,7 +66,7 @@ type ItemProps = ActItem;
 function ListItem({ data }: { data: ItemProps }) {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const setImage = (Picture: { PictureUrl1?: string | undefined } | undefined) => {
+  const setImage = (Picture: PicType) => {
     const { PictureUrl1 } = Picture || {};
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };

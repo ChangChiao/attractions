@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "@emotion/styled";
-import ListCard from "../../../components/ListCard.tsx";
+import ListCard from "../../../components/ListCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faChevronRight } from "@fortawesome/free-solid-svg-icons";
 
@@ -33,9 +33,9 @@ function Hot() {
         </span>
       </div>
       <div className="list">
-        {list.map((vo) => {
+        {/* {list.map((vo) => {
           return <ListCard data={vo} />;
-        })}
+        })} */}
       </div>
     </HotComp>
   );

@@ -1,18 +1,19 @@
 import React, { useState } from "react";
-import DropDown from "../../../components/DropDown";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt, faSearch } from "@fortawesome/free-solid-svg-icons";
 import { Search as SearchSlice, useDispatch } from "../../../store/";
-import { MENU_LIST } from "../../../config/constant";
+import { MENU_LIST } from "../../../global/constant";
+import DropDown from "../../../components/DropDown";
+import { MEDIA_QUERY, COLOR } from "@/style";
 
 const TitleComp = styled.div`
   text-align: left;
   padding: 5% 10%;
   display: flex;
   justify-content: center;
-  @media (max-width: 980px) {
+  ${MEDIA_QUERY.lg} {
     display: block;
     text-align: center;
     padding: 5% 0;
@@ -20,7 +21,7 @@ const TitleComp = styled.div`
   .area {
     width: 40%;
     padding-left: 20px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       width: 100%;
       padding-left: 0px;
     }
@@ -28,7 +29,7 @@ const TitleComp = styled.div`
   .main-title {
     font-size: 36px;
     line-height: 50px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       font-size: 32px;
     }
     .taiwan {
@@ -38,7 +39,7 @@ const TitleComp = styled.div`
         position: absolute;
         bottom: -3px;
         height: 2px;
-        background-color: var(--green_light);
+        background-color: ${COLOR.green_light};
         width: 100%;
         left: 0;
       }
@@ -49,7 +50,7 @@ const TitleComp = styled.div`
     padding: 20px 0;
     color: #646464;
     svg {
-      color: var(--green_light);
+      color: ${COLOR.green_light};
       margin: 0 5px;
     }
     span {
@@ -59,7 +60,7 @@ const TitleComp = styled.div`
   .search-input {
     width: 300px;
     margin-top: 10px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       width: 100%;
       margin-top: 16px;
     }
@@ -71,7 +72,7 @@ const TitleComp = styled.div`
     letter-spacing: 5px;
     display: block;
     cursor: pointer;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       width: 100%;
     }
     svg {

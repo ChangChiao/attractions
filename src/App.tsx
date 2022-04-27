@@ -5,10 +5,14 @@ import Intro from "./page/Intro";
 import Search from "./page/Search";
 import NotFound from "./page/NotFound";
 import { ToastContainer } from "react-toastify";
-
+import { ResetStyle, GlobalStyle, ButtonStyle, TitleStyle } from "./style";
 function App() {
   return (
     <div className="App">
+      <ResetStyle />
+      <GlobalStyle />
+      <ButtonStyle />
+      <TitleStyle />
       <HashRouter>
         <Routes>
           <Route element={<Layout.Default />}>

@@ -2,14 +2,14 @@ import React from "react";
 import styled from "@emotion/styled";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, Intro } from "../store/";
-import { allType } from "../types";
+import { allType, PicType } from "../types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMapMarkerAlt } from "@fortawesome/free-solid-svg-icons";
 import { typeGuardAct, typeGuardSpot } from "../utils/typeGuard";
 const Card = styled.div`
   width: 24%;
   cursor: pointer;
-  @media (max-width: 980px) {
+  ${MEDIA_QUERY.lg} {
     width: 100%;
   }
   &:hover {
@@ -46,7 +46,7 @@ type CardProps = allType;
 function ListCard({ data }: { data: CardProps }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const setImage = (Picture: { PictureUrl1?: string | undefined } | undefined) => {
+  const setImage = (Picture: PicType) => {
     const { PictureUrl1 } = Picture || {};
     return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/default.png`;
   };

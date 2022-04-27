@@ -21,8 +21,8 @@ const getAuthorizationHeader = () => {
 
 type sendData = {
   $top: number;
-  $filter: string;
   $skip?: number;
+  $filter: string;
   $orderBy?: string;
   city?: string;
 };

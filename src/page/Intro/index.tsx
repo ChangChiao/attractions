@@ -9,9 +9,11 @@ import InfoCardAct from "../../components/InfoCardAct";
 import InfoCardRest from "../../components/InfoCardRest";
 import InfoCardSpot from "../../components/InfoCardSpot";
 import Crumb from "../../components/Crumb";
-import { MENU_LIST } from "../../config/constant";
+import { MENU_LIST } from "../../global/constant";
 import { SpotItem, RestItem, ActItem, allType, PicType } from "../../types/apiType";
 import { typeGuardAct, typeGuardSpot } from "../../utils/typeGuard";
+import { MEDIA_QUERY } from "@/style";
+
 const IntroComp = styled.div`
   margin-top: 30px;
   .main-cover {
@@ -19,7 +21,7 @@ const IntroComp = styled.div`
     height: 400px;
     object-fit: cover;
     border-radius: 20px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       height: 200px;
     }
   }
@@ -47,14 +49,14 @@ const IntroComp = styled.div`
   .intro {
     display: flex;
     justify-content: space-between;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       display: block;
     }
   }
   .map {
     width: 48%;
     height: 100%;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       width: 100%;
     }
   }
@@ -63,7 +65,7 @@ const IntroComp = styled.div`
     background: #f9f9f9;
     border-radius: 20px;
     padding: 20px 10px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       width: 100%;
     }
     p {
@@ -95,8 +97,8 @@ function Index() {
   const [title, setTitle] = useState("");
   const introData = useSelector(Intro.selectIntro) as allType;
   const setImage = (Picture: PicType) => {
-    // const { PictureUrl1 } = Picture;
-    return Picture.PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
+    const { PictureUrl1 } = Picture;
+    return PictureUrl1 ? PictureUrl1 : process.env.PUBLIC_URL + `/image/default/act.jpg`;
   };
 
   const randomNum = (x: number) => {
@@ -152,10 +154,10 @@ function Index() {
     if (arr.length === 0) arr.push("#熱門打卡");
     setTag(arr);
   };
-  const getCrumb = (): string | undefined => {
-    if (!introData.type) return undefined;
+  const getCrumb = (): string => {
+    // if (!introData.type) return undefined;
     const label = MENU_LIST.find((vo) => vo.value === introData.type);
-    return label && label.value;
+    return label?.value as string;
   };
 
   // const typeGuard = <T> (key: string): introData is T => {

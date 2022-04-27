@@ -14,8 +14,8 @@ export type ActItem = {
     PositionLon: number;
   };
   City?: string;
-  Picture?: {
-    PictureUrl1?: string;
+  Picture: {
+    PictureUrl1: string;
   };
 };
 
@@ -35,8 +35,8 @@ export type SpotItem = {
   Address?: string;
   City?: string;
   TicketInfo?: string;
-  Picture?: {
-    PictureUrl1?: string;
+  Picture: {
+    PictureUrl1: string;
   };
 };
 
@@ -55,8 +55,8 @@ export type RestItem = {
   WebsiteUrl?: string;
   Address?: string;
   City?: string;
-  Picture?: {
-    PictureUrl1?: string;
+  Picture: {
+    PictureUrl1: string;
   };
 };
 
@@ -69,7 +69,5 @@ export enum typeList {
 }
 
 export type PicType = {
-  Picture?: {
-    PictureUrl1?: string;
-  };
+  PictureUrl1: string;
 };

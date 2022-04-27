@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import styled from "@emotion/styled";
 import { css } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
-import { MENU_LIST } from "../config/constant";
+import { MENU_LIST } from "../global/constant";
 import { useDispatch, Search } from "../store/";
+import { MEDIA_QUERY } from "@/style";
 
 const titleStyle = css`
   color: var(--green);
@@ -20,7 +21,7 @@ const HeaderComp = styled.div`
   align-items: center;
   padding: 0 50px;
   border-bottom: 1px solid #ccc;
-  @media (max-width: 980px) {
+  ${MEDIA_QUERY.lg} {
     display: none;
   }
   h1 {
@@ -35,7 +36,7 @@ const MenuComp = styled.ul`
   display: flex;
   justify-content: center;
   align-items: center;
-  @media (max-width: 980px) {
+  ${MEDIA_QUERY.lg} {
     display: none;
   }
   li {
@@ -61,7 +62,7 @@ const MobileComp = styled.header`
     cursor: pointer;
     padding-top: 10px;
   }
-  @media (max-width: 980px) {
+  ${MEDIA_QUERY.lg} {
     display: block;
   }
 `;
@@ -154,9 +155,9 @@ export function Header() {
   useEffect(() => {
     const body: HTMLBodyElement = document.getElementsByTagName("body")[0];
     if (active) {
-      body.style = "position:fixed";
+      body.style.setProperty("position", "fixed");
     } else {
-      body.style = "";
+      body.style.setProperty("position", "");
     }
   }, [active]);
   return (
@@ -168,12 +169,12 @@ export function Header() {
           {MENU_LIST.map((vo) => {
             return (
               <li
-                key={vo.name}
+                key={vo.label}
                 onClick={() => {
-                  handleClick(vo.path);
+                  handleClick(vo.value);
                 }}
               >
-                {vo.name}
+                {vo.label}
               </li>
             );
           })}
@@ -192,12 +193,12 @@ export function Header() {
           {MENU_LIST.map((vo) => {
             return (
               <li
-                key={"m" + vo.name}
+                key={"m" + vo.label}
                 onClick={() => {
-                  handleClick(vo.path);
+                  handleClick(vo.value);
                 }}
               >
-                {vo.name}
+                {vo.label}
               </li>
             );
           })}

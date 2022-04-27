@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import { Search, useDispatch } from "../store/";
 import { allType } from "../types";
+import { MEDIA_QUERY } from "@/style";
 import { typeGuardAct, typeGuardSpot } from "../utils/typeGuard";
 const RecommendComp = styled.div`
   margin-top: 50px;
@@ -21,7 +22,7 @@ const RecommendComp = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: 16px;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       display: block;
     }
   }

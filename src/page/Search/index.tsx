@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import DatePicker from "react-datepicker";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faFileAlt } from "@fortawesome/free-solid-svg-icons";
-import { MENU_LIST, MenuItem } from "../../config/constant";
+import { MENU_LIST, MenuItem } from "../../global/constant";
 import { Search, useDispatch, useSelector } from "../../store";
 import { getActivity, getSpot, getRestaurant } from "../../utils/api";
 import CitySelect from "../../components/CitySelect";
@@ -13,6 +13,7 @@ import Category from "../../components/Category";
 import Loading from "../../components/Loading";
 import { ActItem, SpotItem, RestItem } from "../../types";
 import "react-datepicker/dist/react-datepicker.css";
+import { MEDIA_QUERY } from "@/style";
 
 type SearchPageProps = {
   type: string;
@@ -24,14 +25,14 @@ const SearchPageComp = styled.div<SearchPageProps>`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       display: block;
     }
     .search-input {
       flex-grow: 1;
       margin-top: 5px;
       margin-right: 5px;
-      @media (max-width: 980px) {
+      ${MEDIA_QUERY.lg} {
         width: 100%;
         margin: ${(props) => (props.type === "activity" ? "4px 0" : "20px 0 10px")};
       }
@@ -43,7 +44,7 @@ const SearchPageComp = styled.div<SearchPageProps>`
       input {
         width: 200px;
       }
-      @media (max-width: 980px) {
+      ${MEDIA_QUERY.lg} {
         margin-top: 10px;
         width: 100% !important;
         .input {
@@ -57,7 +58,7 @@ const SearchPageComp = styled.div<SearchPageProps>`
       letter-spacing: 5px;
       display: block;
       cursor: pointer;
-      @media (max-width: 980px) {
+      ${MEDIA_QUERY.lg} {
         width: 100%;
       }
       svg {
@@ -85,7 +86,7 @@ const SearchResultComp = styled.div`
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    @media (max-width: 980px) {
+    ${MEDIA_QUERY.lg} {
       display: block;
     }
     svg {
@@ -113,43 +114,18 @@ function Index() {
   let skip = 0;
   const dispatch = useDispatch();
   const [result, setResult] = useState<AllList>([]);
-  const [city, _setCity] = useState("");
-  const [keyword, _setKeyword] = useState("");
-  const [category, _setCategory] = useState("");
-  const [startDate, _setStartDate] = useState(new Date());
-  const [showCategory, _setShowCategory] = useState(true);
+  const [city, setCity] = useState<string>("");
+  const [keyword, setKeyword] = useState("");
+  const [category, setCategory] = useState("");
+  const [startDate, setStartDate] = useState<Date>(new Date());
+  const [showCategory, setShowCategory] = useState(true);
   const [pennding, setPennding] = useState(false);
-  const searchData = useSelector(Search.selectSearch);
-  const refKeyword = useRef(keyword);
-  const refStartDate = useRef(startDate);
-  const refCity = useRef(city);
-  const refCatacory = useRef(category);
-  const refShowCategory = useRef(showCategory);
-
-  const setKeyword = (data) => {
-    refKeyword.current = data;
-    _setKeyword(data);
-  };
-
-  const setStartDate = (data) => {
-    refStartDate.current = data;
-    _setStartDate(data);
-  };
-
-  const setCity = (data) => {
-    refCity.current = data;
-    _setCity(data);
-  };
-
-  const setCategory = (data) => {
-    refCatacory.current = data;
-    _setCategory(data);
-  };
-
-  const setShowCategory = (data) => {
-    refShowCategory.current = data;
-    _setShowCategory(data);
-  };
+  const searchData = useSelector(Search.selectSearch) as { type: string; keyword: string };
+  // const refKeyword = useRef(keyword);
+  // const refStartDate = useRef(startDate);
+  // const refCity = useRef(city);
+  // const refCatacory = useRef(category);
+  // const refShowCategory = useRef(showCategory);
 
   const placeholderConfig = {
     activity: "你想玩什麼？",
@@ -173,17 +149,17 @@ function Index() {
     skip = 0;
     endFlag = false;
     // setStartDate(new Date());
-    // setKeyword("");
-    // setCity({});
+    setKeyword("");
+    setCity("");
     setResult([]);
   };
 
-  const chainStr = (arr) => {
+  const chainStr = (arr: string[]) => {
     let newArr = arr.filter((vo) => vo !== "");
     return newArr.join(" and ");
   };
 
-  const transDate = (date) => {
+  const transDate = (date: Date) => {
     const time = new Date(date);
     return [time.getMonth() + 1, time.getFullYear()];
   };
@@ -191,7 +167,7 @@ function Index() {
   const queryStr = () => {
     const word = [getQueryName(), "Description"];
     const wordArr = word.map((vo) => {
-      return ` contains(${vo}, '${refCatacory.current}') `;
+      return ` contains(${vo}, '${showCategory}') `;
     });
     return wordArr.join("or");
   };
@@ -208,17 +184,17 @@ function Index() {
 
   const getData = useCallback(async () => {
     let list: string | any[] = [];
-    let [month, year] = searchData.type === "activity" ? transDate(refStartDate.current) : [];
-    let nameStr = refKeyword.current ? `contains(${getQueryName()},'${keyword}')` : "";
+    let [month, year] = searchData.type === "activity" ? transDate(startDate) : [];
+    let nameStr = keyword ? `contains(${getQueryName()},'${keyword}')` : "";
     let monthStr = month ? `month(StartTime) eq ${month}` : "";
     let yearStr = year ? `year(StartTime) eq ${year}` : "";
     let noCover = "Picture/PictureUrl1 ne null";
-    let categoryStr = refCatacory.current && queryStr();
+    let categoryStr = category && queryStr();
     const sendData = {
       $top: 30,
       $skip: skip,
       $filter: chainStr([nameStr, monthStr, yearStr, noCover, categoryStr]),
-      city: refCity.current?.value,
+      city: city,
     };
     console.log("sendData", sendData);
     setPennding(true);
@@ -254,7 +230,7 @@ function Index() {
   };
 
   const scrollEvent = () => {
-    if (document.body.offsetHeight - window.innerHeight < 5 || endFlag || refShowCategory.current) return;
+    if (document.body.offsetHeight - window.innerHeight < 5 || endFlag || showCategory) return;
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight) {
       console.log("is-bottom====", keyword);
       !pennding && loadMore();
@@ -318,8 +294,8 @@ function Index() {
           搜尋
         </button>
       </div>
-      {refShowCategory.current && <Category type={searchData.type} setCategory={setCategory} />}
-      {!refShowCategory.current && (
+      {category && <Category type={searchData.type} setCategory={setCategory} />}
+      {!category && (
         <SearchResultComp>
           <h3 className="search-result-text">
             搜尋結果

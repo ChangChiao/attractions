@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
-import { CATEGORYLIST } from "../config/constant";
-
+import { CATEGORYLIST } from "../global/constant";
+import { MEDIA_QUERY } from "@/style";
 const CategoryComp = styled.div`
   padding-top: 50px;
   .list {
@@ -23,7 +23,7 @@ const CategoryComp = styled.div`
       background-size: 100%;
       background-position: center;
       background-repeat: no-repeat;
-      @media (max-width: 980px) {
+      ${MEDIA_QUERY.lg} {
         width: 100%;
       }
       p {
